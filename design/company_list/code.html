@@ -1,0 +1,404 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+      rel="stylesheet"
+      as="style"
+      onload="this.rel='stylesheet'"
+      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+
+    <title>Stitch Design</title>
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  </head>
+  <body>
+    <div class="relative flex h-auto min-h-screen w-full flex-col bg-[#111a22] dark group/design-root overflow-x-hidden" style='font-family: Inter, "Noto Sans", sans-serif;'>
+      <div class="layout-container flex h-full grow flex-col">
+        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#233648] px-10 py-3">
+          <div class="flex items-center gap-8">
+            <div class="flex items-center gap-4 text-white">
+              <div class="size-4">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_6_535)">
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z"
+                      fill="currentColor"
+                    ></path>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_6_535"><rect width="48" height="48" fill="white"></rect></clipPath>
+                  </defs>
+                </svg>
+              </div>
+              <h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">FleetSafe</h2>
+            </div>
+            <div class="flex items-center gap-9">
+              <a class="text-white text-sm font-medium leading-normal" href="#">Dashboard</a>
+              <a class="text-white text-sm font-medium leading-normal" href="#">Vehicles</a>
+              <a class="text-white text-sm font-medium leading-normal" href="#">Drivers</a>
+              <a class="text-white text-sm font-medium leading-normal" href="#">Maintenance</a>
+              <a class="text-white text-sm font-medium leading-normal" href="#">Reports</a>
+              <a class="text-white text-sm font-medium leading-normal" href="#">Admin</a>
+            </div>
+          </div>
+          <div class="flex flex-1 justify-end gap-8">
+            <label class="flex flex-col min-w-40 !h-10 max-w-64">
+              <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                <div
+                  class="text-[#92adc9] flex border-none bg-[#233648] items-center justify-center pl-4 rounded-l-lg border-r-0"
+                  data-icon="MagnifyingGlass"
+                  data-size="24px"
+                  data-weight="regular"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                    <path
+                      d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+                    ></path>
+                  </svg>
+                </div>
+                <input
+                  placeholder="Search"
+                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#233648] focus:border-none h-full placeholder:text-[#92adc9] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+                  value=""
+                />
+              </div>
+            </label>
+            <div
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuClZrh1EKmbq8Q1KhpuY8JB8b27vxRJVUwfpXIpg4Nmy4TzQY3jjWh8JETMHqRDAADdg4i0nBLmxLCcVnEhUUbjyRCD8VZ8UGuv0BJnut6-U65qNeiZip7oy8piWoW0Lk1navXn-t9lRAtcK8KtAT5JkJoYUZ8e07rWYjuVSA9ZB8lyWJQIa_IRActLJu5rOJvv-GkuSr1oeItWZ0URjhsNF02zqLalaH5w7rUvcfPD_rvem14VsEN9aIIt9w61aOufZJxWRo05eP9P");'
+            ></div>
+          </div>
+        </header>
+        <div class="px-40 flex flex-1 justify-center py-5">
+          <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+            <div class="flex flex-wrap justify-between gap-3 p-4">
+              <p class="text-white tracking-light text-[32px] font-bold leading-tight min-w-72">Companies</p>
+              <button
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-[#233648] text-white text-sm font-medium leading-normal"
+              >
+                <span class="truncate">Add Company</span>
+              </button>
+            </div>
+            <div class="px-4 py-3">
+              <label class="flex flex-col min-w-40 h-12 w-full">
+                <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                  <div
+                    class="text-[#92adc9] flex border-none bg-[#233648] items-center justify-center pl-4 rounded-l-lg border-r-0"
+                    data-icon="MagnifyingGlass"
+                    data-size="24px"
+                    data-weight="regular"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+                      <path
+                        d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <input
+                    placeholder="Search by name or ID"
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#233648] focus:border-none h-full placeholder:text-[#92adc9] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+                    value=""
+                  />
+                </div>
+              </label>
+            </div>
+            <div class="flex gap-3 p-3 flex-wrap pr-4">
+              <button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#233648] pl-4 pr-2">
+                <p class="text-white text-sm font-medium leading-normal">Status</p>
+                <div class="text-white" data-icon="CaretDown" data-size="20px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
+                  </svg>
+                </div>
+              </button>
+              <button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#233648] pl-4 pr-2">
+                <p class="text-white text-sm font-medium leading-normal">Region</p>
+                <div class="text-white" data-icon="CaretDown" data-size="20px" data-weight="regular">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
+                  </svg>
+                </div>
+              </button>
+            </div>
+            <div class="px-4 py-3 @container">
+              <div class="flex overflow-hidden rounded-lg border border-[#324d67] bg-[#111a22]">
+                <table class="flex-1">
+                  <thead>
+                    <tr class="bg-[#192633]">
+                      <th class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-120 px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">
+                        Company Name
+                      </th>
+                      <th class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-240 px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">ID</th>
+                      <th class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-360 px-4 py-3 text-left text-white w-60 text-sm font-medium leading-normal">Status</th>
+                      <th class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-480 px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">Region</th>
+                      <th class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-600 px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">
+                        Compliance Score
+                      </th>
+                      <th class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-720 px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">
+                        Last Updated
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-t border-t-[#324d67]">
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-120 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">
+                        Acme Logistics
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-240 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">12345</td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
+                        <button
+                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-[#233648] text-white text-sm font-medium leading-normal w-full"
+                        >
+                          <span class="truncate">Active</span>
+                        </button>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-480 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">
+                        Northeast
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-600 h-[72px] px-4 py-2 w-[400px] text-sm font-normal leading-normal">
+                        <div class="flex items-center gap-3">
+                          <div class="w-[88px] overflow-hidden rounded-sm bg-[#324d67]"><div class="h-1 rounded-full bg-[#1380ec]" style="width: 96.5909%;"></div></div>
+                          <p class="text-white text-sm font-medium leading-normal">85</p>
+                        </div>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-720 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">
+                        2023-11-15
+                      </td>
+                    </tr>
+                    <tr class="border-t border-t-[#324d67]">
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-120 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">
+                        Global Transport
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-240 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">67890</td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
+                        <button
+                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-[#233648] text-white text-sm font-medium leading-normal w-full"
+                        >
+                          <span class="truncate">Active</span>
+                        </button>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-480 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">
+                        Southeast
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-600 h-[72px] px-4 py-2 w-[400px] text-sm font-normal leading-normal">
+                        <div class="flex items-center gap-3">
+                          <div class="w-[88px] overflow-hidden rounded-sm bg-[#324d67]"><div class="h-1 rounded-full bg-[#1380ec]" style="width: 100%;"></div></div>
+                          <p class="text-white text-sm font-medium leading-normal">92</p>
+                        </div>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-720 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">
+                        2023-11-20
+                      </td>
+                    </tr>
+                    <tr class="border-t border-t-[#324d67]">
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-120 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">
+                        Rapid Delivery
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-240 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">24680</td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
+                        <button
+                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-[#233648] text-white text-sm font-medium leading-normal w-full"
+                        >
+                          <span class="truncate">Inactive</span>
+                        </button>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-480 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">Midwest</td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-600 h-[72px] px-4 py-2 w-[400px] text-sm font-normal leading-normal">
+                        <div class="flex items-center gap-3">
+                          <div class="w-[88px] overflow-hidden rounded-sm bg-[#324d67]"><div class="h-1 rounded-full bg-[#1380ec]" style="width: 88.6364%;"></div></div>
+                          <p class="text-white text-sm font-medium leading-normal">78</p>
+                        </div>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-720 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">
+                        2023-11-10
+                      </td>
+                    </tr>
+                    <tr class="border-t border-t-[#324d67]">
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-120 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">
+                        Swift Transit
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-240 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">13579</td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
+                        <button
+                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-[#233648] text-white text-sm font-medium leading-normal w-full"
+                        >
+                          <span class="truncate">Active</span>
+                        </button>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-480 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">West</td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-600 h-[72px] px-4 py-2 w-[400px] text-sm font-normal leading-normal">
+                        <div class="flex items-center gap-3">
+                          <div class="w-[88px] overflow-hidden rounded-sm bg-[#324d67]"><div class="h-1 rounded-full bg-[#1380ec]" style="width: 100%;"></div></div>
+                          <p class="text-white text-sm font-medium leading-normal">95</p>
+                        </div>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-720 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">
+                        2023-11-25
+                      </td>
+                    </tr>
+                    <tr class="border-t border-t-[#324d67]">
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-120 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">
+                        Express Carriers
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-240 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">98765</td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
+                        <button
+                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-[#233648] text-white text-sm font-medium leading-normal w-full"
+                        >
+                          <span class="truncate">Active</span>
+                        </button>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-480 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">
+                        Southwest
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-600 h-[72px] px-4 py-2 w-[400px] text-sm font-normal leading-normal">
+                        <div class="flex items-center gap-3">
+                          <div class="w-[88px] overflow-hidden rounded-sm bg-[#324d67]"><div class="h-1 rounded-full bg-[#1380ec]" style="width: 100%;"></div></div>
+                          <p class="text-white text-sm font-medium leading-normal">88</p>
+                        </div>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-720 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">
+                        2023-11-18
+                      </td>
+                    </tr>
+                    <tr class="border-t border-t-[#324d67]">
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-120 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">
+                        Pinnacle Fleet
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-240 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">54321</td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
+                        <button
+                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-[#233648] text-white text-sm font-medium leading-normal w-full"
+                        >
+                          <span class="truncate">Inactive</span>
+                        </button>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-480 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">
+                        Northeast
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-600 h-[72px] px-4 py-2 w-[400px] text-sm font-normal leading-normal">
+                        <div class="flex items-center gap-3">
+                          <div class="w-[88px] overflow-hidden rounded-sm bg-[#324d67]"><div class="h-1 rounded-full bg-[#1380ec]" style="width: 81.8182%;"></div></div>
+                          <p class="text-white text-sm font-medium leading-normal">72</p>
+                        </div>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-720 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">
+                        2023-11-05
+                      </td>
+                    </tr>
+                    <tr class="border-t border-t-[#324d67]">
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-120 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">Prime Movers</td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-240 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">11223</td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
+                        <button
+                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-[#233648] text-white text-sm font-medium leading-normal w-full"
+                        >
+                          <span class="truncate">Active</span>
+                        </button>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-480 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">
+                        Southeast
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-600 h-[72px] px-4 py-2 w-[400px] text-sm font-normal leading-normal">
+                        <div class="flex items-center gap-3">
+                          <div class="w-[88px] overflow-hidden rounded-sm bg-[#324d67]"><div class="h-1 rounded-full bg-[#1380ec]" style="width: 100%;"></div></div>
+                          <p class="text-white text-sm font-medium leading-normal">90</p>
+                        </div>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-720 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">
+                        2023-11-22
+                      </td>
+                    </tr>
+                    <tr class="border-t border-t-[#324d67]">
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-120 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">
+                        Elite Transport
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-240 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">33445</td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
+                        <button
+                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-[#233648] text-white text-sm font-medium leading-normal w-full"
+                        >
+                          <span class="truncate">Active</span>
+                        </button>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-480 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">Midwest</td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-600 h-[72px] px-4 py-2 w-[400px] text-sm font-normal leading-normal">
+                        <div class="flex items-center gap-3">
+                          <div class="w-[88px] overflow-hidden rounded-sm bg-[#324d67]"><div class="h-1 rounded-full bg-[#1380ec]" style="width: 93.1818%;"></div></div>
+                          <p class="text-white text-sm font-medium leading-normal">82</p>
+                        </div>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-720 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">
+                        2023-11-12
+                      </td>
+                    </tr>
+                    <tr class="border-t border-t-[#324d67]">
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-120 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">
+                        Superior Logistics
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-240 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">55667</td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
+                        <button
+                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-[#233648] text-white text-sm font-medium leading-normal w-full"
+                        >
+                          <span class="truncate">Active</span>
+                        </button>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-480 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">West</td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-600 h-[72px] px-4 py-2 w-[400px] text-sm font-normal leading-normal">
+                        <div class="flex items-center gap-3">
+                          <div class="w-[88px] overflow-hidden rounded-sm bg-[#324d67]"><div class="h-1 rounded-full bg-[#1380ec]" style="width: 100%;"></div></div>
+                          <p class="text-white text-sm font-medium leading-normal">98</p>
+                        </div>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-720 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">
+                        2023-11-28
+                      </td>
+                    </tr>
+                    <tr class="border-t border-t-[#324d67]">
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-120 h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">
+                        Apex Carriers
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-240 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">77889</td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-360 h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
+                        <button
+                          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 bg-[#233648] text-white text-sm font-medium leading-normal w-full"
+                        >
+                          <span class="truncate">Inactive</span>
+                        </button>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-480 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">
+                        Southwest
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-600 h-[72px] px-4 py-2 w-[400px] text-sm font-normal leading-normal">
+                        <div class="flex items-center gap-3">
+                          <div class="w-[88px] overflow-hidden rounded-sm bg-[#324d67]"><div class="h-1 rounded-full bg-[#1380ec]" style="width: 73.8636%;"></div></div>
+                          <p class="text-white text-sm font-medium leading-normal">65</p>
+                        </div>
+                      </td>
+                      <td class="table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-720 h-[72px] px-4 py-2 w-[400px] text-[#92adc9] text-sm font-normal leading-normal">
+                        2023-11-01
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <style>
+                          @container(max-width:120px){.table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-120{display: none;}}
+                @container(max-width:240px){.table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-240{display: none;}}
+                @container(max-width:360px){.table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-360{display: none;}}
+                @container(max-width:480px){.table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-480{display: none;}}
+                @container(max-width:600px){.table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-600{display: none;}}
+                @container(max-width:720px){.table-8efeac1b-d0d1-4ad7-bcff-a6091c84c7c7-column-720{display: none;}}
+              </style>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
