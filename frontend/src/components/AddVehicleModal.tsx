@@ -1,20 +1,15 @@
 import { useState, useEffect } from 'react';
 import Modal from './Modal';
-import { vehiclesApi, companiesApi } from '../api/client';
-
-interface Company {
-  id: number;
-  name: string;
-  identity_card: string;
-}
+import { vehiclesApi, companiesApi, type Company } from '../api/client';
 
 interface AddVehicleModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSuccess: () => void;
+  defaultCompanyId?: number;
 }
 
-const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) => {
+const AddVehicleModal = ({ isOpen, onClose, onSuccess, defaultCompanyId }: AddVehicleModalProps) => {
   const [companies, setCompanies] = useState<Company[]>([]);
   const [formData, setFormData] = useState({
     license_plate: '',
@@ -50,8 +45,41 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
   useEffect(() => {
     if (isOpen) {
       fetchCompanies();
+      if (defaultCompanyId) {
+        setFormData(prev => ({ ...prev, company_id: String(defaultCompanyId) }));
+      }
+    } else {
+      // Reset form when modal closes
+      setFormData({
+        license_plate: '',
+        company_id: defaultCompanyId ? String(defaultCompanyId) : '',
+        manufacturer: '',
+        model: '',
+        car_type: '',
+        production_year: '',
+        weight: '',
+        department: '',
+        chassis_number: '',
+        internal_number: '',
+        odometer_reading: '',
+        equipment: '',
+        has_tow_hook: false,
+        is_operational: false,
+        license_expiry_date: '',
+        carrier_license_expiry_date: '',
+        last_safety_inspection: '',
+        next_safety_inspection: '',
+        hova_insurance_expiry_date: '',
+        mekif_insurance_expiry_date: '',
+        special_equipment_expiry_date: '',
+        hazardous_license_expiry_date: '',
+        tachograph_expiry_date: '',
+        winter_inspection_expiry_date: '',
+        brake_inspection_expiry_date: '',
+        notes: '',
+      });
     }
-  }, [isOpen]);
+  }, [isOpen, defaultCompanyId]);
 
   const fetchCompanies = async () => {
     try {
@@ -138,7 +166,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
       // Reset form
       setFormData({
         license_plate: '',
-        company_id: '',
+        company_id: defaultCompanyId ? String(defaultCompanyId) : '',
         manufacturer: '',
         model: '',
         car_type: '',
@@ -165,20 +193,20 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
         notes: '',
       });
     } catch (err: any) {
-      setError(err.message || 'Failed to create vehicle');
+      setError(err.message || 'יצירת רכב נכשלה');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Add Vehicle">
+    <Modal isOpen={isOpen} onClose={onClose} title="הוסף רכב">
       <form onSubmit={handleSubmit} className="modal-form">
         {error && <div className="form-error">{error}</div>}
         
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">License Plate *</label>
+            <label className="form-label">מספר רישוי *</label>
             <input
               type="text"
               name="license_plate"
@@ -189,14 +217,15 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Company</label>
+            <label className="form-label">חברה</label>
             <select
               name="company_id"
               className="form-input"
               value={formData.company_id}
               onChange={handleChange}
+              disabled={!!defaultCompanyId}
             >
-              <option value="">Select a company</option>
+              <option value="">בחר חברה</option>
               {companies.map(company => (
                 <option key={company.id} value={company.id}>
                   {company.name || company.identity_card}
@@ -208,7 +237,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Manufacturer</label>
+            <label className="form-label">יצרן</label>
             <input
               type="text"
               name="manufacturer"
@@ -218,7 +247,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Model</label>
+            <label className="form-label">דגם</label>
             <input
               type="text"
               name="model"
@@ -231,7 +260,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Type</label>
+            <label className="form-label">סוג</label>
             <input
               type="text"
               name="car_type"
@@ -241,7 +270,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Production Year</label>
+            <label className="form-label">שנת ייצור / עלייה</label>
             <input
               type="number"
               name="production_year"
@@ -256,7 +285,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Weight (kg)</label>
+            <label className="form-label">משקל כולל בטון</label>
             <input
               type="number"
               name="weight"
@@ -267,7 +296,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Department</label>
+            <label className="form-label">מחלקה</label>
             <input
               type="text"
               name="department"
@@ -280,7 +309,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Chassis Number</label>
+            <label className="form-label">מספר שלדה</label>
             <input
               type="text"
               name="chassis_number"
@@ -290,7 +319,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Internal Number</label>
+            <label className="form-label">מספר פנימי</label>
             <input
               type="number"
               name="internal_number"
@@ -303,7 +332,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Odometer Reading</label>
+            <label className="form-label">מד אוץ (קילומטראז')</label>
             <input
               type="number"
               name="odometer_reading"
@@ -314,7 +343,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Equipment</label>
+            <label className="form-label">סוג ציוד/ציוד נלווה</label>
             <input
               type="text"
               name="equipment"
@@ -327,7 +356,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">License Expiry Date</label>
+            <label className="form-label">תוקף רישיון</label>
             <input
               type="date"
               name="license_expiry_date"
@@ -337,7 +366,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Carrier License Expiry</label>
+            <label className="form-label">תוקף רישיון מוביל</label>
             <input
               type="date"
               name="carrier_license_expiry_date"
@@ -350,7 +379,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Last Safety Inspection</label>
+            <label className="form-label">בדיקת קב"ט אחרונה</label>
             <input
               type="date"
               name="last_safety_inspection"
@@ -360,7 +389,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Next Safety Inspection</label>
+            <label className="form-label">בדיקת קב"ט הבאה</label>
             <input
               type="date"
               name="next_safety_inspection"
@@ -373,7 +402,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Hova Insurance Expiry</label>
+            <label className="form-label">תוקף ביטוח חובה</label>
             <input
               type="date"
               name="hova_insurance_expiry_date"
@@ -383,7 +412,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Mekif Insurance Expiry</label>
+            <label className="form-label">תוקף ביטוח מקיף/ג</label>
             <input
               type="date"
               name="mekif_insurance_expiry_date"
@@ -396,7 +425,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Special Equipment Expiry</label>
+            <label className="form-label">תוקף ציוד ייעודי</label>
             <input
               type="date"
               name="special_equipment_expiry_date"
@@ -406,7 +435,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Hazardous License Expiry</label>
+            <label className="form-label">תוקף היתר חומ"ס</label>
             <input
               type="date"
               name="hazardous_license_expiry_date"
@@ -419,7 +448,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Tachograph Expiry</label>
+            <label className="form-label">תוקף כיול טכוגרף</label>
             <input
               type="date"
               name="tachograph_expiry_date"
@@ -429,7 +458,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Winter Inspection Expiry</label>
+            <label className="form-label">תוקף בדיקת חורף</label>
             <input
               type="date"
               name="winter_inspection_expiry_date"
@@ -442,7 +471,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Brake Inspection Expiry</label>
+            <label className="form-label">תוקף בדיקת בלמים חצי שנתית</label>
             <input
               type="date"
               name="brake_inspection_expiry_date"
@@ -464,7 +493,7 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
                 onChange={handleBooleanChange}
                 className="form-checkbox"
               />
-              <span>Has Tow Hook</span>
+              <span>וו גרירה / צלחת</span>
             </label>
           </div>
           <div className="form-group">
@@ -476,13 +505,13 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
                 onChange={handleBooleanChange}
                 className="form-checkbox"
               />
-              <span>Is Operational</span>
+              <span>תפעולי</span>
             </label>
           </div>
         </div>
 
         <div className="form-group">
-          <label className="form-label">Notes</label>
+          <label className="form-label">הערות</label>
           <textarea
             name="notes"
             className="form-input form-textarea"
@@ -494,10 +523,10 @@ const AddVehicleModal = ({ isOpen, onClose, onSuccess }: AddVehicleModalProps) =
 
         <div className="modal-actions">
           <button type="button" className="btn btn-secondary" onClick={onClose} disabled={loading}>
-            Cancel
+            ביטול
           </button>
           <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? 'Creating...' : 'Create Vehicle'}
+            {loading ? 'יוצר...' : 'צור רכב'}
           </button>
         </div>
       </form>

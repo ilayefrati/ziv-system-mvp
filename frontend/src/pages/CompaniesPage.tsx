@@ -1,18 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { companiesApi, searchApi } from '../api/client';
+import { companiesApi, searchApi, type Company } from '../api/client';
 import AddCompanyModal from '../components/AddCompanyModal';
-
-interface Company {
-  id: number;
-  identity_card: string;
-  name?: string;
-  phone?: string;
-  email?: string;
-  vehicles_count: number;
-  drivers_count: number;
-  carrier_license_expiry?: string;
-}
 
 const CompaniesPage = () => {
   const navigate = useNavigate();
@@ -53,7 +42,7 @@ const CompaniesPage = () => {
   if (loading) {
     return (
       <div className="page-container">
-        <div className="loading">Loading...</div>
+        <div className="loading">טוען...</div>
       </div>
     );
   }
@@ -62,7 +51,7 @@ const CompaniesPage = () => {
     <div className="page-container">
       <div className="content-container">
         <div className="page-header">
-          <p className="page-title">Companies</p>
+          <p className="page-title">חברות</p>
         </div>
         <div className="page-actions">
           <div className="search-container">
@@ -74,7 +63,7 @@ const CompaniesPage = () => {
                   </svg>
                 </div>
                 <input
-                  placeholder="Search by name or ID"
+                  placeholder="חיפוש לפי שם או תעודת זהות"
                   className="form-input search-input"
                   value={searchQuery}
                   onChange={(e) => handleSearch(e.target.value)}
@@ -83,7 +72,7 @@ const CompaniesPage = () => {
             </label>
           </div>
           <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>
-            <span className="btn-text">Add Company</span>
+            <span className="btn-text">הוסף חברה</span>
           </button>
         </div>
         <div className="table-container">
@@ -91,19 +80,19 @@ const CompaniesPage = () => {
             <table>
               <thead>
                 <tr>
-                  <th>Company Name</th>
-                  <th>ID</th>
-                  <th>Phone</th>
-                  <th>Email</th>
-                  <th>Vehicles</th>
-                  <th>Drivers</th>
+                  <th>שם חברה</th>
+                  <th>תעודת זהות</th>
+                  <th>טלפון</th>
+                  <th>אימייל</th>
+                  <th>רכבים</th>
+                  <th>נהגים</th>
                 </tr>
               </thead>
               <tbody>
                 {companies.length === 0 ? (
                   <tr>
                     <td colSpan={6} className="text-center text-secondary empty-state">
-                      No companies found
+                      לא נמצאו חברות
                     </td>
                   </tr>
                 ) : (

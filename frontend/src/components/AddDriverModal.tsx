@@ -1,20 +1,15 @@
 import { useState, useEffect } from 'react';
 import Modal from './Modal';
-import { driversApi, companiesApi } from '../api/client';
-
-interface Company {
-  id: number;
-  name: string;
-  identity_card: string;
-}
+import { driversApi, companiesApi, type Company } from '../api/client';
 
 interface AddDriverModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSuccess: () => void;
+  defaultCompanyId?: number;
 }
 
-const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => {
+const AddDriverModal = ({ isOpen, onClose, onSuccess, defaultCompanyId }: AddDriverModalProps) => {
   const [companies, setCompanies] = useState<Company[]>([]);
   const [formData, setFormData] = useState({
     identity_card: '',
@@ -46,8 +41,37 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
   useEffect(() => {
     if (isOpen) {
       fetchCompanies();
+      if (defaultCompanyId) {
+        setFormData(prev => ({ ...prev, company_id: String(defaultCompanyId) }));
+      }
+    } else {
+      // Reset form when modal closes
+      setFormData({
+        identity_card: '',
+        company_id: defaultCompanyId ? String(defaultCompanyId) : '',
+        first_name: '',
+        last_name: '',
+        license_class: '',
+        license_expiry_date: '',
+        traffic_info_expiry_date: '',
+        address: '',
+        phone_mobile: '',
+        phone_home: '',
+        email: '',
+        job_title: '',
+        work_location: '',
+        marital_status: '',
+        birth_date: '',
+        employment_start_date: '',
+        education: '',
+        personal_number_in_company: '',
+        was_license_revoked: false,
+        has_hazardous_materials_permit: false,
+        has_crane_operation_permit: false,
+        notes: '',
+      });
     }
-  }, [isOpen]);
+  }, [isOpen, defaultCompanyId]);
 
   const fetchCompanies = async () => {
     try {
@@ -121,7 +145,7 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
       // Reset form
       setFormData({
         identity_card: '',
-        company_id: '',
+        company_id: defaultCompanyId ? String(defaultCompanyId) : '',
         first_name: '',
         last_name: '',
         license_class: '',
@@ -144,20 +168,20 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
         notes: '',
       });
     } catch (err: any) {
-      setError(err.message || 'Failed to create driver');
+      setError(err.message || 'יצירת נהג נכשלה');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Add Driver">
+    <Modal isOpen={isOpen} onClose={onClose} title="הוסף נהג">
       <form onSubmit={handleSubmit} className="modal-form">
         {error && <div className="form-error">{error}</div>}
         
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Identity Card *</label>
+            <label className="form-label">מספר ת.ז *</label>
             <input
               type="text"
               name="identity_card"
@@ -168,14 +192,15 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Company</label>
+            <label className="form-label">חברה</label>
             <select
               name="company_id"
               className="form-input"
               value={formData.company_id}
               onChange={handleChange}
+              disabled={!!defaultCompanyId}
             >
-              <option value="">Select a company</option>
+              <option value="">בחר חברה</option>
               {companies.map(company => (
                 <option key={company.id} value={company.id}>
                   {company.name || company.identity_card}
@@ -187,7 +212,7 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">First Name</label>
+            <label className="form-label">שם פרטי</label>
             <input
               type="text"
               name="first_name"
@@ -197,7 +222,7 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Last Name</label>
+            <label className="form-label">שם משפחה</label>
             <input
               type="text"
               name="last_name"
@@ -210,7 +235,7 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">License Class</label>
+            <label className="form-label">דרגת רישיון נהיגה</label>
             <input
               type="text"
               name="license_class"
@@ -220,7 +245,7 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Personal Number in Company</label>
+            <label className="form-label">מספר אישי בחברה</label>
             <input
               type="text"
               name="personal_number_in_company"
@@ -233,7 +258,7 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">License Expiry Date</label>
+            <label className="form-label">תוקף רישיון נהיגה</label>
             <input
               type="date"
               name="license_expiry_date"
@@ -243,7 +268,7 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Traffic Info Expiry Date</label>
+            <label className="form-label">תוקף מידע תעבורתי</label>
             <input
               type="date"
               name="traffic_info_expiry_date"
@@ -256,7 +281,7 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Address</label>
+            <label className="form-label">כתובת מגורים</label>
             <input
               type="text"
               name="address"
@@ -266,7 +291,7 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Mobile Phone</label>
+            <label className="form-label">טל נייד</label>
             <input
               type="text"
               name="phone_mobile"
@@ -279,7 +304,7 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Home Phone</label>
+            <label className="form-label">טל בבית</label>
             <input
               type="text"
               name="phone_home"
@@ -289,7 +314,7 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Email</label>
+            <label className="form-label">דואר אלקטרוני</label>
             <input
               type="email"
               name="email"
@@ -302,7 +327,7 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Job Title</label>
+            <label className="form-label">תפקיד</label>
             <input
               type="text"
               name="job_title"
@@ -312,7 +337,7 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Work Location</label>
+            <label className="form-label">אזור / מקום עבודה</label>
             <input
               type="text"
               name="work_location"
@@ -325,7 +350,7 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Marital Status</label>
+            <label className="form-label">מצב משפחתי</label>
             <input
               type="text"
               name="marital_status"
@@ -335,7 +360,7 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Education</label>
+            <label className="form-label">השכלה</label>
             <input
               type="text"
               name="education"
@@ -348,7 +373,7 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Birth Date</label>
+            <label className="form-label">תאריך לידה</label>
             <input
               type="date"
               name="birth_date"
@@ -358,7 +383,7 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Employment Start Date</label>
+            <label className="form-label">מועד תחילת עבודה</label>
             <input
               type="date"
               name="employment_start_date"
@@ -379,7 +404,7 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
                 onChange={handleBooleanChange}
                 className="form-checkbox"
               />
-              <span>Was License Revoked</span>
+              <span>נשלל בפועל בעבר</span>
             </label>
           </div>
           <div className="form-group">
@@ -391,7 +416,7 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
                 onChange={handleBooleanChange}
                 className="form-checkbox"
               />
-              <span>Has Hazardous Materials Permit</span>
+              <span>היתר להוביל חומרים מסוכנים</span>
             </label>
           </div>
         </div>
@@ -406,14 +431,14 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
                 onChange={handleBooleanChange}
                 className="form-checkbox"
               />
-              <span>Has Crane Operation Permit</span>
+              <span>היתר להפעיל מנוף</span>
             </label>
           </div>
           <div className="form-group"></div>
         </div>
 
         <div className="form-group">
-          <label className="form-label">Notes</label>
+          <label className="form-label">הערות כלליות</label>
           <textarea
             name="notes"
             className="form-input form-textarea"
@@ -425,10 +450,10 @@ const AddDriverModal = ({ isOpen, onClose, onSuccess }: AddDriverModalProps) => 
 
         <div className="modal-actions">
           <button type="button" className="btn btn-secondary" onClick={onClose} disabled={loading}>
-            Cancel
+            ביטול
           </button>
           <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? 'Creating...' : 'Create Driver'}
+            {loading ? 'יוצר...' : 'צור נהג'}
           </button>
         </div>
       </form>

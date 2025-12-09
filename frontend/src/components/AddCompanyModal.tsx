@@ -107,20 +107,20 @@ const AddCompanyModal = ({ isOpen, onClose, onSuccess }: AddCompanyModalProps) =
         notes: '',
       });
     } catch (err: any) {
-      setError(err.message || 'Failed to create company');
+      setError(err.message || 'יצירת חברה נכשלה');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Add Company">
+    <Modal isOpen={isOpen} onClose={onClose} title="הוסף חברה">
       <form onSubmit={handleSubmit} className="modal-form">
         {error && <div className="form-error">{error}</div>}
         
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Identity Card *</label>
+            <label className="form-label">מספר ת.ז/ח.פ *</label>
             <input
               type="text"
               name="identity_card"
@@ -131,7 +131,7 @@ const AddCompanyModal = ({ isOpen, onClose, onSuccess }: AddCompanyModalProps) =
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Company Name</label>
+            <label className="form-label">שם חברה</label>
             <input
               type="text"
               name="name"
@@ -144,7 +144,7 @@ const AddCompanyModal = ({ isOpen, onClose, onSuccess }: AddCompanyModalProps) =
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Address</label>
+            <label className="form-label">כתובת</label>
             <input
               type="text"
               name="address"
@@ -154,7 +154,7 @@ const AddCompanyModal = ({ isOpen, onClose, onSuccess }: AddCompanyModalProps) =
             />
           </div>
           <div className="form-group">
-            <label className="form-label">P.O. Box</label>
+            <label className="form-label">ת.ד (תיבת דואר)</label>
             <input
               type="text"
               name="po_box"
@@ -167,7 +167,7 @@ const AddCompanyModal = ({ isOpen, onClose, onSuccess }: AddCompanyModalProps) =
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Phone</label>
+            <label className="form-label">טלפון</label>
             <input
               type="text"
               name="phone"
@@ -177,7 +177,7 @@ const AddCompanyModal = ({ isOpen, onClose, onSuccess }: AddCompanyModalProps) =
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Fax</label>
+            <label className="form-label">פקס</label>
             <input
               type="text"
               name="fax"
@@ -190,7 +190,7 @@ const AddCompanyModal = ({ isOpen, onClose, onSuccess }: AddCompanyModalProps) =
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Email</label>
+            <label className="form-label">דואר אלקטרוני</label>
             <input
               type="email"
               name="email"
@@ -200,7 +200,7 @@ const AddCompanyModal = ({ isOpen, onClose, onSuccess }: AddCompanyModalProps) =
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Safety Officer</label>
+            <label className="form-label">קצין בטיחות אחראי</label>
             <input
               type="text"
               name="safety_officer"
@@ -213,7 +213,7 @@ const AddCompanyModal = ({ isOpen, onClose, onSuccess }: AddCompanyModalProps) =
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Contact Person</label>
+            <label className="form-label">איש קשר / אחראי</label>
             <input
               type="text"
               name="contact_person"
@@ -223,7 +223,7 @@ const AddCompanyModal = ({ isOpen, onClose, onSuccess }: AddCompanyModalProps) =
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Contact Phone</label>
+            <label className="form-label">טלפון איש קשר</label>
             <input
               type="text"
               name="contact_phone"
@@ -236,7 +236,7 @@ const AddCompanyModal = ({ isOpen, onClose, onSuccess }: AddCompanyModalProps) =
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Manager Name</label>
+            <label className="form-label">מנהל מקצועי</label>
             <input
               type="text"
               name="manager_name"
@@ -246,7 +246,7 @@ const AddCompanyModal = ({ isOpen, onClose, onSuccess }: AddCompanyModalProps) =
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Manager ID</label>
+            <label className="form-label">ת.ז מנהל מקצועי</label>
             <input
               type="text"
               name="manager_id"
@@ -259,7 +259,7 @@ const AddCompanyModal = ({ isOpen, onClose, onSuccess }: AddCompanyModalProps) =
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Manager Phone</label>
+            <label className="form-label">טלפון מנהל מקצועי</label>
             <input
               type="text"
               name="manager_phone"
@@ -269,7 +269,7 @@ const AddCompanyModal = ({ isOpen, onClose, onSuccess }: AddCompanyModalProps) =
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Inspection Week</label>
+            <label className="form-label">שבוע בדיקה</label>
             <input
               type="number"
               name="inspection_week"
@@ -284,7 +284,7 @@ const AddCompanyModal = ({ isOpen, onClose, onSuccess }: AddCompanyModalProps) =
 
         <div className="modal-form-row">
           <div className="form-group">
-            <label className="form-label">Carrier License Expiry</label>
+            <label className="form-label">רישיון מוביל בתוקף עד</label>
             <input
               type="date"
               name="carrier_license_expiry"
@@ -294,7 +294,7 @@ const AddCompanyModal = ({ isOpen, onClose, onSuccess }: AddCompanyModalProps) =
             />
           </div>
           <div className="form-group">
-            <label className="form-label">Established Date</label>
+            <label className="form-label">תאריך הקמה</label>
             <input
               type="date"
               name="established_date"
@@ -306,7 +306,7 @@ const AddCompanyModal = ({ isOpen, onClose, onSuccess }: AddCompanyModalProps) =
         </div>
 
         <div className="form-group">
-          <label className="form-label">Notes</label>
+          <label className="form-label">הערות כלליות</label>
           <textarea
             name="notes"
             className="form-input form-textarea"
@@ -318,10 +318,10 @@ const AddCompanyModal = ({ isOpen, onClose, onSuccess }: AddCompanyModalProps) =
 
         <div className="modal-actions">
           <button type="button" className="btn btn-secondary" onClick={onClose} disabled={loading}>
-            Cancel
+            ביטול
           </button>
           <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? 'Creating...' : 'Create Company'}
+            {loading ? 'יוצר...' : 'צור חברה'}
           </button>
         </div>
       </form>

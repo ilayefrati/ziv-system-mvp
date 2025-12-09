@@ -85,27 +85,27 @@ const DashboardPage = () => {
 
         // Check vehicle expiry dates
         vehiclesRes.data.forEach((vehicle: any) => {
-          checkDate(vehicle.license_expiry_date, 'Vehicle License', vehicle);
-          checkDate(vehicle.next_safety_inspection, 'Safety Inspection', vehicle);
-          checkDate(vehicle.hova_insurance_expiry_date, 'Hova Insurance', vehicle);
-          checkDate(vehicle.mekif_insurance_expiry_date, 'Mekif Insurance', vehicle);
-          checkDate(vehicle.carrier_license_expiry_date, 'Carrier License', vehicle);
-          checkDate(vehicle.hazardous_license_expiry_date, 'Hazardous License', vehicle);
-          checkDate(vehicle.tachograph_expiry_date, 'Tachograph', vehicle);
-          checkDate(vehicle.winter_inspection_expiry_date, 'Winter Inspection', vehicle);
-          checkDate(vehicle.brake_inspection_expiry_date, 'Brake Inspection', vehicle);
-          checkDate(vehicle.special_equipment_expiry_date, 'Special Equipment', vehicle);
+          checkDate(vehicle.license_expiry_date, 'תוקף רישיון', vehicle);
+          checkDate(vehicle.next_safety_inspection, 'בדיקת קב"ט הבאה', vehicle);
+          checkDate(vehicle.hova_insurance_expiry_date, 'תוקף ביטוח חובה', vehicle);
+          checkDate(vehicle.mekif_insurance_expiry_date, 'תוקף ביטוח מקיף/ג', vehicle);
+          checkDate(vehicle.carrier_license_expiry_date, 'תוקף רישיון מוביל', vehicle);
+          checkDate(vehicle.hazardous_license_expiry_date, 'תוקף היתר חומ"ס', vehicle);
+          checkDate(vehicle.tachograph_expiry_date, 'תוקף כיול טכוגרף', vehicle);
+          checkDate(vehicle.winter_inspection_expiry_date, 'תוקף בדיקת חורף', vehicle);
+          checkDate(vehicle.brake_inspection_expiry_date, 'תוקף בדיקת בלמים חצי שנתית', vehicle);
+          checkDate(vehicle.special_equipment_expiry_date, 'תוקף ציוד ייעודי', vehicle);
         });
 
         // Check driver expiry dates
         driversRes.data.forEach((driver: any) => {
-          checkDate(driver.license_expiry_date, 'Driver License', undefined, driver);
-          checkDate(driver.traffic_info_expiry_date, 'Traffic Info', undefined, driver);
+          checkDate(driver.license_expiry_date, 'תוקף רישיון נהיגה', undefined, driver);
+          checkDate(driver.traffic_info_expiry_date, 'תוקף מידע תעבורתי', undefined, driver);
         });
 
         // Check company expiry dates
         companiesRes.data.forEach((company: any) => {
-          checkDate(company.carrier_license_expiry, 'Company Carrier License', undefined, undefined, company);
+          checkDate(company.carrier_license_expiry, 'רישיון מוביל בתוקף עד', undefined, undefined, company);
         });
 
         // Sort by expiry date (soonest first)
@@ -130,7 +130,7 @@ const DashboardPage = () => {
   if (loading) {
     return (
       <div className="page-container">
-        <div className="loading">Loading...</div>
+        <div className="loading">טוען...</div>
       </div>
     );
   }
@@ -139,47 +139,46 @@ const DashboardPage = () => {
     <div className="page-container">
       <div className="content-container">
         <div className="page-header">
-          <p className="page-title">Dashboard</p>
+          <p className="page-title">לוח בקרה</p>
         </div>
-        <h2 className="page-section-title">Quick insights</h2>
         <div className="stats-grid">
           <Link to="/vehicles" className="stat-card-link">
             <div className="stat-card">
-              <p className="stat-label">Vehicles</p>
+              <p className="stat-label">רכבים</p>
               <p className="stat-value">{stats.vehicles}</p>
             </div>
           </Link>
           <Link to="/drivers" className="stat-card-link">
             <div className="stat-card">
-              <p className="stat-label">Drivers</p>
+              <p className="stat-label">נהגים</p>
               <p className="stat-value">{stats.drivers}</p>
             </div>
           </Link>
           <Link to="/companies" className="stat-card-link">
             <div className="stat-card">
-              <p className="stat-label">Companies</p>
+              <p className="stat-label">חברות</p>
               <p className="stat-value">{stats.companies}</p>
             </div>
           </Link>
         </div>
-        <h2 className="page-section-title">Upcoming expiry alerts</h2>
+        <h2 className="page-section-title">התראות תפוגה קרובות</h2>
         <div className="table-container">
           <div className="table-wrapper">
             <table>
               <thead>
                 <tr>
-                  <th>Document</th>
-                  <th>Entity</th>
-                  <th>Related</th>
-                  <th>Expiry date</th>
-                  <th className="narrow">Status</th>
+                  <th>מסמך</th>
+                  <th>ישות</th>
+                  <th>סוג</th>
+                  <th>תאריך תפוגה</th>
+                  <th className="narrow">סטטוס</th>
                 </tr>
               </thead>
               <tbody>
                 {expiryAlerts.length === 0 ? (
                   <tr>
                     <td colSpan={5} className="text-center text-secondary empty-state">
-                      No expiry alerts
+                      אין התראות תפוגה
                     </td>
                   </tr>
                 ) : (
@@ -189,10 +188,12 @@ const DashboardPage = () => {
                     const expiryDate = new Date(alert.expiry_date);
                     const formattedDate = expiryDate.toLocaleDateString();
                     const daysText = alert.days_until_expiry < 0 
-                      ? `${Math.abs(alert.days_until_expiry)} days ago`
+                      ? `לפני ${Math.abs(alert.days_until_expiry)} ימים`
                       : alert.days_until_expiry === 0
-                      ? 'Today'
-                      : `${alert.days_until_expiry} days`;
+                      ? 'היום'
+                      : `${alert.days_until_expiry} ימים`;
+
+                    const entityType = alert.vehicle_id ? 'רכב' : alert.driver_id ? 'נהג' : alert.company_id ? 'חברה' : '-';
 
                     return (
                       <tr key={index}>
@@ -214,25 +215,17 @@ const DashboardPage = () => {
                             alert.vehicle || alert.driver || alert.company || '-'
                           )}
                         </td>
-                        <td>
-                          {alert.vehicle_id && alert.driver ? (
-                            alert.driver
-                          ) : alert.driver_id && alert.vehicle ? (
-                            alert.vehicle
-                          ) : (
-                            '-'
-                          )}
-                        </td>
+                        <td>{entityType}</td>
                         <td className="text-secondary">
-                          {formattedDate} <span className="text-secondary" style={{ fontSize: '12px', marginLeft: '8px' }}>({daysText})</span>
+                          {formattedDate} <span className="text-secondary" style={{ fontSize: '12px', marginRight: '8px' }}>({daysText})</span>
                         </td>
                         <td className="narrow">
                           <button
                             className={`btn ${alert.status === 'expired' ? 'btn-danger' : 'btn-warning'}`}
                           >
-                            <span className="btn-text">
-                              {alert.status === 'expired' ? 'Expired' : 'Expiring Soon'}
-                            </span>
+                          <span className="btn-text">
+                            {alert.status === 'expired' ? 'פג תוקף' : 'יפוג בקרוב'}
+                          </span>
                           </button>
                         </td>
                       </tr>
@@ -250,17 +243,17 @@ const DashboardPage = () => {
               onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
               disabled={currentPage === 1}
             >
-              <span className="btn-text">Previous</span>
+              <span className="btn-text">הקודם</span>
             </button>
             <span className="pagination-info">
-              Page {currentPage} of {Math.ceil(expiryAlerts.length / itemsPerPage)} ({expiryAlerts.length} total)
+              עמוד {currentPage} מתוך {Math.ceil(expiryAlerts.length / itemsPerPage)} ({expiryAlerts.length} סה"כ)
             </span>
             <button
               className="btn btn-secondary"
               onClick={() => setCurrentPage(prev => Math.min(Math.ceil(expiryAlerts.length / itemsPerPage), prev + 1))}
               disabled={currentPage >= Math.ceil(expiryAlerts.length / itemsPerPage)}
             >
-              <span className="btn-text">Next</span>
+              <span className="btn-text">הבא</span>
             </button>
           </div>
         )}
