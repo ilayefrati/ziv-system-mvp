@@ -1,21 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { vehiclesApi, searchApi } from '../api/client';
+import { vehiclesApi, searchApi, type Vehicle } from '../api/client';
 import AddVehicleModal from '../components/AddVehicleModal';
-
-interface Vehicle {
-  id: number;
-  license_plate: string;
-  manufacturer?: string;
-  model?: string;
-  production_year?: number;
-  car_type?: string;
-  company_name?: string;
-  driver_name?: string;
-  license_expiry_date?: string;
-  next_safety_inspection?: string;
-  is_operational?: boolean;
-}
 
 const VehiclesPage = () => {
   const navigate = useNavigate();
@@ -61,7 +47,7 @@ const VehiclesPage = () => {
   if (loading) {
     return (
       <div className="page-container">
-        <div className="loading">Loading...</div>
+        <div className="loading">טוען...</div>
       </div>
     );
   }
@@ -70,7 +56,7 @@ const VehiclesPage = () => {
     <div className="page-container">
       <div className="content-container">
         <div className="page-header">
-          <p className="page-title">Vehicles</p>
+          <p className="page-title">רכבים</p>
         </div>
         <div className="page-actions">
           <div className="search-container">
@@ -82,7 +68,7 @@ const VehiclesPage = () => {
                   </svg>
                 </div>
                 <input
-                  placeholder="Search by license plate"
+                  placeholder="חיפוש לפי מספר רישוי"
                   className="form-input search-input"
                   value={searchQuery}
                   onChange={(e) => handleSearch(e.target.value)}
@@ -91,7 +77,7 @@ const VehiclesPage = () => {
             </label>
           </div>
           <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>
-            <span className="btn-text">Add Vehicle</span>
+            <span className="btn-text">הוסף רכב</span>
           </button>
         </div>
         <div className="table-container">
@@ -99,18 +85,18 @@ const VehiclesPage = () => {
             <table>
               <thead>
                 <tr>
-                  <th>License Plate</th>
-                  <th>Make/Model</th>
-                  <th>Company</th>
-                  <th>Driver</th>
-                  <th>Registration Expiry</th>
+                  <th>מספר רישוי</th>
+                  <th>יצרן/דגם</th>
+                  <th>חברה</th>
+                  <th>נהג</th>
+                  <th>תפוגת רישיון</th>
                 </tr>
               </thead>
               <tbody>
                 {vehicles.length === 0 ? (
                   <tr>
                     <td colSpan={5} className="text-center text-secondary empty-state">
-                      No vehicles found
+                      לא נמצאו רכבים
                     </td>
                   </tr>
                 ) : (

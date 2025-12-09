@@ -1,21 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { driversApi, searchApi } from '../api/client';
+import { driversApi, searchApi, type Driver } from '../api/client';
 import AddDriverModal from '../components/AddDriverModal';
-
-interface Driver {
-  id: number;
-  identity_card: string;
-  first_name?: string;
-  last_name?: string;
-  full_name?: string;
-  company_name?: string;
-  license_class?: string;
-  license_expiry_date?: string;
-  phone_mobile?: string;
-  vehicle_plate?: string;
-  is_operational?: boolean;
-}
 
 const DriversPage = () => {
   const navigate = useNavigate();
@@ -61,7 +47,7 @@ const DriversPage = () => {
   if (loading) {
     return (
       <div className="page-container">
-        <div className="loading">Loading...</div>
+        <div className="loading">טוען...</div>
       </div>
     );
   }
@@ -70,7 +56,7 @@ const DriversPage = () => {
     <div className="page-container">
       <div className="content-container">
         <div className="page-header">
-          <p className="page-title">Drivers</p>
+          <p className="page-title">נהגים</p>
         </div>
         <div className="page-actions">
           <div className="search-container">
@@ -82,7 +68,7 @@ const DriversPage = () => {
                   </svg>
                 </div>
                 <input
-                  placeholder="Search by name or ID"
+                  placeholder="חיפוש לפי שם או תעודת זהות"
                   className="form-input search-input"
                   value={searchQuery}
                   onChange={(e) => handleSearch(e.target.value)}
@@ -91,7 +77,7 @@ const DriversPage = () => {
             </label>
           </div>
           <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>
-            <span className="btn-text">Add Driver</span>
+            <span className="btn-text">הוסף נהג</span>
           </button>
         </div>
         <div className="table-container">
@@ -99,19 +85,19 @@ const DriversPage = () => {
             <table>
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>ID</th>
-                  <th>Company</th>
-                  <th>License Class</th>
-                  <th>License Expiry</th>
-                  <th>Vehicle</th>
+                  <th>שם</th>
+                  <th>תעודת זהות</th>
+                  <th>חברה</th>
+                  <th>סוג רישיון</th>
+                  <th>תפוגת רישיון</th>
+                  <th>רכב</th>
                 </tr>
               </thead>
               <tbody>
                 {drivers.length === 0 ? (
                   <tr>
                     <td colSpan={6} className="text-center text-secondary empty-state">
-                      No drivers found
+                      לא נמצאו נהגים
                     </td>
                   </tr>
                 ) : (

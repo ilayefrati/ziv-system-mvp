@@ -59,15 +59,102 @@ function buildQueryString(params: Record<string, any>): string {
   return queryString ? `?${queryString}` : '';
 }
 
+// Type definitions
+export interface Company {
+  id: number;
+  identity_card: string;
+  name?: string;
+  address?: string;
+  po_box?: string;
+  phone?: string;
+  fax?: string;
+  contact_person?: string;
+  contact_phone?: string;
+  manager_name?: string;
+  manager_phone?: string;
+  manager_id?: string;
+  email?: string;
+  safety_officer?: string;
+  carrier_license_expiry?: string;
+  established_date?: string;
+  inspection_week?: number;
+  notes?: string;
+  vehicles_count?: number;
+  drivers_count?: number;
+}
+
+export interface Vehicle {
+  id: number;
+  license_plate: string;
+  company_id?: number;
+  company_name?: string;
+  assigned_driver_id?: number;
+  driver_name?: string;
+  manufacturer?: string;
+  model?: string;
+  weight?: number;
+  department?: string;
+  car_type?: string;
+  carrier_license_expiry_date?: string;
+  internal_number?: number;
+  chassis_number?: string;
+  odometer_reading?: number;
+  production_year?: number;
+  license_expiry_date?: string;
+  last_safety_inspection?: string;
+  next_safety_inspection?: string;
+  hova_insurance_expiry_date?: string;
+  mekif_insurance_expiry_date?: string;
+  special_equipment_expiry_date?: string;
+  hazardous_license_expiry_date?: string;
+  tachograph_expiry_date?: string;
+  winter_inspection_expiry_date?: string;
+  brake_inspection_expiry_date?: string;
+  equipment?: string;
+  has_tow_hook?: boolean;
+  is_operational?: boolean;
+  notes?: string;
+}
+
+export interface Driver {
+  id: number;
+  identity_card: string;
+  company_id?: number;
+  company_name?: string;
+  first_name?: string;
+  last_name?: string;
+  full_name?: string;
+  license_class?: string;
+  license_expiry_date?: string;
+  traffic_info_expiry_date?: string;
+  address?: string;
+  phone_mobile?: string;
+  phone_home?: string;
+  job_title?: string;
+  work_location?: string;
+  marital_status?: string;
+  birth_date?: string;
+  employment_start_date?: string;
+  education?: string;
+  was_license_revoked?: boolean;
+  has_hazardous_materials_permit?: boolean;
+  has_crane_operation_permit?: boolean;
+  personal_number_in_company?: string;
+  email?: string;
+  notes?: string;
+  vehicle_id?: number;
+  vehicle_plate?: string;
+}
+
 // Companies API
 export const companiesApi = {
-  getAll: async () => {
+  getAll: async (): Promise<{ data: Company[] }> => {
     const response = await fetchAPI('/companies');
-    return getJSON(response);
+    return getJSON<Company[]>(response);
   },
-  getById: async (id: number) => {
+  getById: async (id: number): Promise<{ data: Company }> => {
     const response = await fetchAPI(`/companies/${id}`);
-    return getJSON(response);
+    return getJSON<Company>(response);
   },
   create: async (data: any) => {
     const response = await fetchAPI('/companies', {
@@ -76,12 +163,12 @@ export const companiesApi = {
     });
     return getJSON(response);
   },
-  update: async (id: number, data: any) => {
+  update: async (id: number, data: any): Promise<{ data: Company }> => {
     const response = await fetchAPI(`/companies/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
     });
-    return getJSON(response);
+    return getJSON<Company>(response);
   },
   delete: async (id: number) => {
     const response = await fetchAPI(`/companies/${id}`, {
@@ -89,13 +176,13 @@ export const companiesApi = {
     });
     return getJSON(response);
   },
-  getVehicles: async (id: number) => {
+  getVehicles: async (id: number): Promise<{ data: Vehicle[] }> => {
     const response = await fetchAPI(`/companies/${id}/vehicles`);
-    return getJSON(response);
+    return getJSON<Vehicle[]>(response);
   },
-  getDrivers: async (id: number) => {
+  getDrivers: async (id: number): Promise<{ data: Driver[] }> => {
     const response = await fetchAPI(`/companies/${id}/drivers`);
-    return getJSON(response);
+    return getJSON<Driver[]>(response);
   },
   uploadFile: async (id: number, file: File, description?: string) => {
     const formData = new FormData();
@@ -112,13 +199,13 @@ export const companiesApi = {
 
 // Vehicles API
 export const vehiclesApi = {
-  getAll: async () => {
+  getAll: async (): Promise<{ data: Vehicle[] }> => {
     const response = await fetchAPI('/vehicles');
-    return getJSON(response);
+    return getJSON<Vehicle[]>(response);
   },
-  getById: async (id: number) => {
+  getById: async (id: number): Promise<{ data: Vehicle }> => {
     const response = await fetchAPI(`/vehicles/${id}`);
-    return getJSON(response);
+    return getJSON<Vehicle>(response);
   },
   create: async (data: any) => {
     const response = await fetchAPI('/vehicles', {
@@ -127,12 +214,12 @@ export const vehiclesApi = {
     });
     return getJSON(response);
   },
-  update: async (id: number, data: any) => {
+  update: async (id: number, data: any): Promise<{ data: Vehicle }> => {
     const response = await fetchAPI(`/vehicles/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
     });
-    return getJSON(response);
+    return getJSON<Vehicle>(response);
   },
   delete: async (id: number) => {
     const response = await fetchAPI(`/vehicles/${id}`, {
@@ -147,9 +234,9 @@ export const vehiclesApi = {
     });
     return getJSON(response);
   },
-  getDriver: async (id: number) => {
+  getDriver: async (id: number): Promise<{ data: Driver | null }> => {
     const response = await fetchAPI(`/vehicles/${id}/driver`);
-    return getJSON(response);
+    return getJSON<Driver | null>(response);
   },
   uploadFile: async (id: number, file: File, description?: string) => {
     const formData = new FormData();
@@ -166,13 +253,13 @@ export const vehiclesApi = {
 
 // Drivers API
 export const driversApi = {
-  getAll: async () => {
+  getAll: async (): Promise<{ data: Driver[] }> => {
     const response = await fetchAPI('/drivers');
-    return getJSON(response);
+    return getJSON<Driver[]>(response);
   },
-  getById: async (id: number) => {
+  getById: async (id: number): Promise<{ data: Driver }> => {
     const response = await fetchAPI(`/drivers/${id}`);
-    return getJSON(response);
+    return getJSON<Driver>(response);
   },
   create: async (data: any) => {
     const response = await fetchAPI('/drivers', {
@@ -181,12 +268,12 @@ export const driversApi = {
     });
     return getJSON(response);
   },
-  update: async (id: number, data: any) => {
+  update: async (id: number, data: any): Promise<{ data: Driver }> => {
     const response = await fetchAPI(`/drivers/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
     });
-    return getJSON(response);
+    return getJSON<Driver>(response);
   },
   delete: async (id: number) => {
     const response = await fetchAPI(`/drivers/${id}`, {
@@ -236,12 +323,12 @@ export const filesApi = {
 
 // Search API
 export const searchApi = {
-  companies: async (query: string) => {
+  companies: async (query: string): Promise<{ data: Company[] }> => {
     const queryString = buildQueryString({ q: query });
     const response = await fetchAPI(`/search/companies${queryString}`);
-    return getJSON(response);
+    return getJSON<Company[]>(response);
   },
-  vehicles: async (query: string, filters?: { company_id?: number; vehicle_type?: string }) => {
+  vehicles: async (query: string, filters?: { company_id?: number; vehicle_type?: string }): Promise<{ data: Vehicle[] }> => {
     const params: Record<string, any> = { q: query };
     if (filters) {
       if (filters.company_id !== undefined) params.company_id = filters.company_id;
@@ -249,9 +336,9 @@ export const searchApi = {
     }
     const queryString = buildQueryString(params);
     const response = await fetchAPI(`/search/vehicles${queryString}`);
-    return getJSON(response);
+    return getJSON<Vehicle[]>(response);
   },
-  drivers: async (query: string, filters?: { company_id?: number; status?: string }) => {
+  drivers: async (query: string, filters?: { company_id?: number; status?: string }): Promise<{ data: Driver[] }> => {
     const params: Record<string, any> = { q: query };
     if (filters) {
       if (filters.company_id !== undefined) params.company_id = filters.company_id;
@@ -259,6 +346,6 @@ export const searchApi = {
     }
     const queryString = buildQueryString(params);
     const response = await fetchAPI(`/search/drivers${queryString}`);
-    return getJSON(response);
+    return getJSON<Driver[]>(response);
   },
 };
